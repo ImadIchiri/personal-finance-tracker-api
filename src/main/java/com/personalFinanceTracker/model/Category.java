@@ -19,14 +19,14 @@ public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(unique = true)
     private String title;
     private double monthlyAmount;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, optional = false)
-    // @JsonBackReference
     private Type type;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "category")
-    @JsonProperty(access = JsonProperty.Access.READ_WRITE)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "category")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Set<Transaction> transactionList = new HashSet<>();
 }

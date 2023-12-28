@@ -21,11 +21,10 @@ public class User {
     private String userName;
     private String firstName;
     private String lastName;
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String email;
     private String password;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "user")
-    @JsonManagedReference(value = "userReference")
     private Set<Transaction> transactionList = new HashSet<>();
 }
